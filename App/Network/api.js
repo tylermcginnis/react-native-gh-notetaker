@@ -8,7 +8,7 @@ var api = {
     return fetch(url);
   },
   getNotes(username){
-    var url = `https://github-note-taker.firebaseio.com/notes/${username}.json`;
+    var url = `https://native-gh-notetaker.firebaseio.com/${username}.json`;
     return fetch(url);
   },
   addNote(username, note){

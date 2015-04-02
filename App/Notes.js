@@ -66,9 +66,9 @@ var styles = {
 class Notes extends React.Component{
   constructor(props){
     super(props);
-    var ds = new ListView.DataSource({rowHasChanged: (row1, row2) => row1 !== row2})
+    this.ds = new ListView.DataSource({rowHasChanged: (row1, row2) => row1 !== row2})
     this.state = {
-      dataSource: ds.cloneWithRows(this.props.notes),
+      dataSource: this.ds.cloneWithRows(this.props.notes),
       note: '',
       error: ''
     }
@@ -79,13 +79,23 @@ class Notes extends React.Component{
     })
   }
   handleSubmit(){
-    api.addNote(this.props.username, this.state.note)
-      .then((res) => res.toJson())
-      .then(function (data) {
+    var note = this.state.note;
+    this.setState({
+      note: ''
+    });
+    api.addNote(this.props.username, note)
+      .then((res) => res.json())
+      .then((data) => {
         console.log('Request succeeded with JSON response', data);
-        //fetch posts again
+        api.getNotes(this.props.username)
+          .then((res) => res.json())
+          .then((data) => {
+            this.setState({
+              dataSource: this.ds.cloneWithRows(data)
+            })
+          });
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.log('Request failed', error);
         this.setState({error})
       });

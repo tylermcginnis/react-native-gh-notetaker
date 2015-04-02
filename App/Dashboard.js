@@ -67,6 +67,7 @@ class Dashboard extends React.Component{
     api.getNotes(this.props.userInfo.login)
       .then((res) => res.json())
       .then((jsonRes) => {
+        jsonRes = jsonRes || [];
         this.props.navigator.push({
           component: Notes,
           title: 'Notes',
