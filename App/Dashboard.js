@@ -22,7 +22,7 @@ var styles = {
     height: 350,
   },
   buttonText: {
-    fontSize: 18,
+    fontSize: 24,
     color: 'white',
     alignSelf: 'center'
   }
@@ -85,19 +85,19 @@ class Dashboard extends React.Component{
         <TouchableHighlight
             style={this.makeBackground(0)}
             onPress={this.goToProfile.bind(this)}
-            underlayColor="black">
+            underlayColor="#88D4F5">
               <Text style={styles.buttonText}>View Profile</Text>
         </TouchableHighlight>
         <TouchableHighlight
             style={this.makeBackground(1)}
             onPress={this.goToRepos.bind(this)}
-            underlayColor="black">
+            underlayColor="#E39EBF">
               <Text style={styles.buttonText}>View Repositories</Text>
         </TouchableHighlight>
         <TouchableHighlight
             style={this.makeBackground(2)}
             onPress={this.goToNotes.bind(this)}
-            underlayColor="black">
+            underlayColor="#9BAAF3">
               <Text style={styles.buttonText}>Take Notes</Text>
         </TouchableHighlight>
       </View>
