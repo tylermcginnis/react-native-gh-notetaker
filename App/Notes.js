@@ -1,18 +1,49 @@
 var React = require('react-native');
+var api = require('./Network/api');
 
 var {
   View,
   Text,
-  ListView
+  ListView,
+  TextInput,
+  TouchableHighlight
 } = React;
 
 var styles = {
   container: {
     flex: 1,
     flexDirection: 'column',
+    marginTop: 65,
   },
   image: {
     height: 350,
+  },
+  buttonText: {
+    fontSize: 18,
+    color: 'white',
+    alignSelf: 'center'
+  },
+  button: {
+    height: 36,
+    flexDirection: 'row',
+    backgroundColor: '#48BBEC',
+    borderColor: '#48BBEC',
+    borderWidth: 1,
+    borderRadius: 8,
+    marginBottom: 10,
+    marginTop: 10,
+    alignSelf: 'stretch',
+    justifyContent: 'center'
+  },
+  searchInput: {
+    height: 50,
+    padding: 4,
+    marginRight: 5,
+    fontSize: 18,
+    borderWidth: 1,
+    borderColor: '#48BBEC',
+    borderRadius: 8,
+    color: '#48BBEC'
   },
   buttonText: {
     fontSize: 18,
@@ -37,8 +68,27 @@ class Notes extends React.Component{
     super(props);
     var ds = new ListView.DataSource({rowHasChanged: (row1, row2) => row1 !== row2})
     this.state = {
-      dataSource: ds.cloneWithRows(this.props.notes)
+      dataSource: ds.cloneWithRows(this.props.notes),
+      note: '',
+      error: ''
     }
+  }
+  handleChange(e){
+    this.setState({
+      note: e.nativeEvent.text
+    })
+  }
+  handleSubmit(){
+    api.addNote(this.props.username, this.state.note)
+      .then((res) => res.toJson())
+      .then(function (data) {
+        console.log('Request succeeded with JSON response', data);
+        //fetch posts again
+      })
+      .catch(function (error) {
+        console.log('Request failed', error);
+        this.setState({error})
+      });
   }
   renderRow(rowData){
     return (
@@ -53,6 +103,17 @@ class Notes extends React.Component{
   render(){
     return (
       <View style={styles.container}>
+      <TextInput
+          style={styles.searchInput}
+          value={this.state.note}
+          onChange={this.handleChange.bind(this)}
+          placeholder="New Note" />
+      <TouchableHighlight
+          style={styles.button}
+          onPress={this.handleSubmit.bind(this)}
+          underlayColor="black">
+            <Text style={styles.buttonText}>Submit</Text>
+        </TouchableHighlight>
         <ListView
           dataSource={this.state.dataSource}
           renderRow={this.renderRow} />

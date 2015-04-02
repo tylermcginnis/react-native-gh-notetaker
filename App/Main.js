@@ -1,5 +1,5 @@
 var React = require('react-native');
-var githubAPI = require('./Network/githubAPI');
+var api = require('./Network/api');
 var Dashboard = require('./Dashboard');
 
 var {
@@ -39,7 +39,7 @@ class Main extends React.Component{
     this.setState({
       isLoading: true,
     });
-    githubAPI.getBio(this.state.username)
+    api.getBio(this.state.username)
       .then((response) => response.json())
       .then((jsonRes) => this.handleResponse(jsonRes))
       .catch((err) => {

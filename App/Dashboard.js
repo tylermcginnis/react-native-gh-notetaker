@@ -1,6 +1,6 @@
 var React = require('react-native');
 var Profile = require('./Profile');
-var githubAPI = require('./Network/githubAPI');
+var api = require('./Network/api');
 var Repositories = require('./Repositories');
 var Notes = require('./Notes');
 
@@ -53,7 +53,7 @@ class Dashboard extends React.Component{
     })
   }
   goToRepos(){
-    githubAPI.getRepos(this.props.userInfo.login)
+    api.getRepos(this.props.userInfo.login)
       .then((res) => res.json())
       .then((jsonRes) => {
         this.props.navigator.push({
@@ -64,11 +64,18 @@ class Dashboard extends React.Component{
       })
   }
   goToNotes(){
-    // this.props.navigator.push({
-    //   component: Notes,
-    //   title: 'Notes',
-    //   passProps: {notes: jsonRes}
-    // })
+    api.getNotes(this.props.userInfo.login)
+      .then((res) => res.json())
+      .then((jsonRes) => {
+        this.props.navigator.push({
+          component: Notes,
+          title: 'Notes',
+          passProps: {
+            notes: jsonRes,
+            username: this.props.userInfo.login
+          }
+        });
+      });
   }
   render(){
     return (
