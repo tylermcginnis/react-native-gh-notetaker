@@ -1,5 +1,7 @@
 var React = require('react-native');
 var Profile = require('./Profile');
+var githubAPI = require('./Network/githubAPI');
+var Repositories = require('./Repositories');
 
 var {
   Text,
@@ -49,6 +51,17 @@ class Dashboard extends React.Component{
       passProps: {userInfo: this.props.userInfo}
     })
   }
+  goToRepos(){
+    githubAPI.getRepos(this.props.userInfo.login)
+      .then((res) => res.json())
+      .then((jsonRes) => {
+        this.props.navigator.push({
+          component: Repositories,
+          title: "Repositories Page",
+          passProps: {repos: jsonRes}
+        });
+      })
+  }
   render(){
     return (
       <View style={styles.container}>
@@ -61,7 +74,7 @@ class Dashboard extends React.Component{
         </TouchableHighlight>
         <TouchableHighlight
             style={this.makeBackground(1)}
-            onPress={this.goToProfile.bind(this)}
+            onPress={this.goToRepos.bind(this)}
             underlayColor="black">
               <Text style={styles.buttonText}>View Repositories</Text>
         </TouchableHighlight>
