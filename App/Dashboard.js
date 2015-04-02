@@ -2,6 +2,7 @@ var React = require('react-native');
 var Profile = require('./Profile');
 var githubAPI = require('./Network/githubAPI');
 var Repositories = require('./Repositories');
+var Notes = require('./Notes');
 
 var {
   Text,
@@ -62,6 +63,13 @@ class Dashboard extends React.Component{
         });
       })
   }
+  goToNotes(){
+    // this.props.navigator.push({
+    //   component: Notes,
+    //   title: 'Notes',
+    //   passProps: {notes: jsonRes}
+    // })
+  }
   render(){
     return (
       <View style={styles.container}>
@@ -80,7 +88,7 @@ class Dashboard extends React.Component{
         </TouchableHighlight>
         <TouchableHighlight
             style={this.makeBackground(2)}
-            onPress={this.goToProfile.bind(this)}
+            onPress={this.goToNotes.bind(this)}
             underlayColor="black">
               <Text style={styles.buttonText}>Take Notes</Text>
         </TouchableHighlight>

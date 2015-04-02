@@ -32,22 +32,19 @@ var styles = {
   }
 }
 
-class Repositories extends React.Component{
+class Notes extends React.Component{
   constructor(props){
     super(props);
     var ds = new ListView.DataSource({rowHasChanged: (row1, row2) => row1 !== row2})
     this.state = {
-      dataSource: ds.cloneWithRows(this.props.repos)
+      dataSource: ds.cloneWithRows(this.props.notes)
     }
   }
   renderRow(rowData){
     return (
       <View>
         <View style={styles.rowContainer}>
-          <Text> {rowData.name} </Text>
-          <Text> {rowData.description} </Text>
-          <Text> {rowData.html_url} </Text>
-          <Text> Stars: {rowData.stargazers_count} </Text>
+          <Text> {rowData} </Text>
         </View>
         <View style={styles.separator} />
       </View>
@@ -64,4 +61,4 @@ class Repositories extends React.Component{
   }
 };
 
-module.exports = Repositories;
+module.exports = Notes;
