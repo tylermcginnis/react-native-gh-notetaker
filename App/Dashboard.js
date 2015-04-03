@@ -15,8 +15,7 @@ var {
 var styles = {
   container: {
     marginTop: 65,
-    flex: 1,
-    flexDirection: 'column'
+    flex: 1
   },
   image: {
     height: 350,

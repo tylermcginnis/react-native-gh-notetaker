@@ -10,8 +10,17 @@ var {
 var styles = {
   container: {
     flex: 1,
-    marginTop: 65,
-    flexDirection: 'column',
+    marginTop: 65
+  },
+  name: {
+    alignSelf: 'center',
+    fontSize: 19,
+    marginTop: 10,
+    marginBottom: 5
+  },
+  handle: {
+    alignSelf: 'center',
+    fontSize: 14,
   },
   image: {
     height: 125,
@@ -31,10 +40,14 @@ var styles = {
     flex: 1
   },
   rowContainer: {
-    flexDirection: 'row',
-    alignSelf: 'stretch',
-    flex: 1,
     padding: 10
+  },
+  rowTitle: {
+    color: '#48BBEC',
+    fontSize: 14
+  },
+  rowContent: {
+    fontSize: 19
   }
 }
 
@@ -51,7 +64,8 @@ class Profile extends React.Component{
     return userInfo[rowData] ? (
         <View>
           <View style={styles.rowContainer}>
-            <Text> {rowData[0].toUpperCase() + rowData.slice(1)} : {userInfo[rowData]} </Text>
+            <Text style={styles.rowTitle}> {rowData[0].toUpperCase() + rowData.slice(1)} </Text>
+            <Text style={styles.rowContent}> {userInfo[rowData]} </Text>
           </View>
           <View style={styles.separator} />
         </View>) :
@@ -60,7 +74,9 @@ class Profile extends React.Component{
   render(){
     return (
       <View style={styles.container}>
-        <Image source={{uri: this.props.userInfo.avatar_url}} style={styles.image}/>
+        <Image source={{uri: this.props.userInfo.avatar_url}} style={styles.image} />
+        <Text style={styles.name}> {this.props.userInfo.name} </Text>
+        <Text style={styles.handle}> {this.props.userInfo.login} </Text>
         <ListView
           dataSource={this.state.dataSource}
           renderRow={this.renderRow.bind(this)} />
