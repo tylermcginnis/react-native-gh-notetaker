@@ -32,11 +32,12 @@ var styles = {
 
 class Profile extends React.Component{
   getRowTitle(user, item){
+    item = (item === 'public_repos') ? item.replace('_', ' ') : item;
     return item[0] ? item[0].toUpperCase() + item.slice(1) : item;
   }
   render(){
     var userInfo = this.props.userInfo;
-    var topicArr = ['company', 'location', 'followers', 'following', 'email', 'bio'];
+    var topicArr = ['company', 'location', 'followers', 'following', 'email', 'bio', 'public_repos'];
     var list = topicArr.map((item, index) => {
       if(!userInfo[item]){
         return <View/>
