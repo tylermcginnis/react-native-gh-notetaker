@@ -1,5 +1,7 @@
 var React = require('react-native');
 var api = require('./Network/api');
+var Separator = require('./Separator');
+var Badge = require('./Badge');
 
 var {
   View,
@@ -12,11 +14,6 @@ var {
 var styles = {
   container: {
     flex: 1,
-    flexDirection: 'column',
-    marginTop: 65,
-  },
-  image: {
-    height: 350,
   },
   buttonText: {
     fontSize: 18,
@@ -45,21 +42,16 @@ var styles = {
     borderRadius: 8,
     color: '#48BBEC'
   },
-  buttonText: {
-    fontSize: 18,
-    color: 'white',
-    alignSelf: 'center'
-  },
-  separator: {
-    height: 2,
-    backgroundColor: '#666',
-    flex: 1
-  },
   rowContainer: {
     flexDirection: 'row',
     alignSelf: 'stretch',
     flex: 1,
     padding: 10
+  },
+  footerContainer: {
+    backgroundColor: '#f5f5f5',
+    height: 100,
+    justifyContent: 'flex-end'
   }
 }
 
@@ -83,11 +75,11 @@ class Notes extends React.Component{
     this.setState({
       note: ''
     });
-    api.addNote(this.props.username, note)
+    api.addNote(this.props.userInfo.username, note)
       .then((res) => res.json())
       .then((data) => {
         console.log('Request succeeded with JSON response', data);
-        api.getNotes(this.props.username)
+        api.getNotes(this.props.userInfo.username)
           .then((res) => res.json())
           .then((data) => {
             this.setState({
@@ -106,27 +98,35 @@ class Notes extends React.Component{
         <View style={styles.rowContainer}>
           <Text> {rowData} </Text>
         </View>
-        <View style={styles.separator} />
+        <Separator />
+      </View>
+    )
+  }
+  footer(){
+    return (
+      <View style={styles.footerContainer}>
+        <Badge userInfo={this.props.userInfo}/>
+        <TextInput
+            style={styles.searchInput}
+            value={this.state.note}
+            onChange={this.handleChange.bind(this)}
+            placeholder="New Note" />
+        <TouchableHighlight
+            style={styles.button}
+            onPress={this.handleSubmit.bind(this)}
+            underlayColor="black">
+              <Text style={styles.buttonText}>Submit</Text>
+          </TouchableHighlight>
       </View>
     )
   }
   render(){
     return (
       <View style={styles.container}>
-      <TextInput
-          style={styles.searchInput}
-          value={this.state.note}
-          onChange={this.handleChange.bind(this)}
-          placeholder="New Note" />
-      <TouchableHighlight
-          style={styles.button}
-          onPress={this.handleSubmit.bind(this)}
-          underlayColor="black">
-            <Text style={styles.buttonText}>Submit</Text>
-        </TouchableHighlight>
-        <ListView
-          dataSource={this.state.dataSource}
-          renderRow={this.renderRow} />
+          <ListView
+            renderFooter = {this.footer.bind(this)}
+            dataSource={this.state.dataSource}
+            renderRow={this.renderRow} />
       </View>
     )
   }

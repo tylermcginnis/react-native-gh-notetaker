@@ -72,7 +72,7 @@ class Dashboard extends React.Component{
           title: 'Notes',
           passProps: {
             notes: jsonRes,
-            username: this.props.userInfo.login
+            userInfo: this.props.userInfo
           }
         });
       });
