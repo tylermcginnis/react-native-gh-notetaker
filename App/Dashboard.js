@@ -58,7 +58,10 @@ class Dashboard extends React.Component{
         this.props.navigator.push({
           component: Repositories,
           title: "Repositories Page",
-          passProps: {repos: jsonRes}
+          passProps: {
+            repos: jsonRes,
+            userInfo: this.props.userInfo
+          }
         });
       })
   }

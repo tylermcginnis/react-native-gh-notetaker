@@ -1,4 +1,6 @@
 var React = require('react-native');
+var Badge = require('./Badge');
+var Separator = require('./Separator');
 
 var {
   View,
@@ -9,26 +11,26 @@ var {
 var styles = {
   container: {
     flex: 1,
-    flexDirection: 'column',
-  },
-  image: {
-    height: 350,
-  },
-  buttonText: {
-    fontSize: 18,
-    color: 'white',
-    alignSelf: 'center'
-  },
-  separator: {
-    height: 2,
-    backgroundColor: '#666',
-    flex: 1
+    marginTop: 65
   },
   rowContainer: {
-    flexDirection: 'row',
-    alignSelf: 'stretch',
+    flexDirection: 'column',
     flex: 1,
     padding: 10
+  },
+  name: {
+    color: '#48BBEC',
+    fontSize: 18,
+    paddingBottom: 5
+  },
+  stars: {
+    color: '#48BBEC',
+    fontSize: 14,
+    paddingBottom: 5
+  },
+  description: {
+    fontSize: 14,
+    paddingBottom: 5
   }
 }
 
@@ -41,21 +43,23 @@ class Repositories extends React.Component{
     }
   }
   renderRow(rowData){
+    var desc = rowData.description ? <Text style={styles.description}> {rowData.description} </Text> : <View />;
     return (
       <View>
         <View style={styles.rowContainer}>
-          <Text> {rowData.name} </Text>
-          <Text> {rowData.description} </Text>
-          <Text> {rowData.html_url} </Text>
-          <Text> Stars: {rowData.stargazers_count} </Text>
+          <Text style={styles.name}> {rowData.name} </Text>
+          <Text style={styles.stars}> Stars: {rowData.stargazers_count} </Text>
+          {desc}
+          <Text style={styles.url}> {rowData.html_url} </Text>
         </View>
-        <View style={styles.separator} />
+        <Separator />
       </View>
     )
   }
   render(){
     return (
       <View style={styles.container}>
+        <Badge userInfo={this.props.userInfo} />
         <ListView
           dataSource={this.state.dataSource}
           renderRow={this.renderRow} />
