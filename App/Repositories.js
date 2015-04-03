@@ -1,12 +1,15 @@
 var React = require('react-native');
 var Badge = require('./Badge');
 var Separator = require('./Separator');
+var Web_View = require('./WebView');
 
 var {
   ScrollView,
   Text,
   View,
-  ListView
+  TouchableHighlight,
+  ListView,
+  WebView,
 } = React;
 
 var styles = {
@@ -35,6 +38,13 @@ var styles = {
 }
 
 class Repositories extends React.Component{
+  openPage(url){
+    this.props.navigator.push({
+      title: 'Web View',
+      component: Web_View,
+      passProps: {url}
+    });
+  }
   render(){
     var repos = this.props.repos;
     var list = repos.map((item, index) => {
@@ -42,10 +52,13 @@ class Repositories extends React.Component{
       return (
         <View>
           <View style={styles.rowContainer}>
-            <Text style={styles.name}> {repos[index].name} </Text>
+            <TouchableHighlight
+              onPress={this.openPage.bind(this, repos[index].html_url)}
+              underLayColor='green'>
+              <Text style={styles.name}>{repos[index].name}</Text>
+            </TouchableHighlight>
             <Text style={styles.stars}> Stars: {repos[index].stargazers_count} </Text>
             {desc}
-            <Text style={styles.url}> {repos[index].html_url} </Text>
           </View>
           <Separator />
         </View>
