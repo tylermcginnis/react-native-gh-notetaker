@@ -14,6 +14,7 @@ var {
 var styles = {
   container: {
     flex: 1,
+    marginTop: 65
   },
   buttonText: {
     fontSize: 18,
@@ -34,11 +35,12 @@ var styles = {
     flex: 10
   },
   rowContainer: {
-    alignSelf: 'stretch',
-    padding: 10
+    padding: 10,
+    flex: 1,
+    flexDirection: 'row',
   },
   footerContainer: {
-    backgroundColor: '#CBCBCB',
+    backgroundColor: '#E3E3E3',
     justifyContent: 'flex-end',
     alignItems: 'center',
     flexDirection: 'row'
@@ -65,11 +67,11 @@ class Notes extends React.Component{
     this.setState({
       note: ''
     });
-    api.addNote(this.props.userInfo.username, note)
+    api.addNote(this.props.userInfo.login, note)
       .then((res) => res.json())
       .then((data) => {
         console.log('Request succeeded with JSON response', data);
-        api.getNotes(this.props.userInfo.username)
+        api.getNotes(this.props.userInfo.login)
           .then((res) => res.json())
           .then((data) => {
             this.setState({
