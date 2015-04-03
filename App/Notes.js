@@ -13,8 +13,7 @@ var {
 
 var styles = {
   container: {
-    flex: 1,
-    marginTop: 65
+    flex: 1
   },
   buttonText: {
     fontSize: 18,
@@ -114,11 +113,11 @@ class Notes extends React.Component{
   render(){
     return (
       <View style={styles.container}>
-        <Badge userInfo={this.props.userInfo}/>
         <ListView
           dataSource={this.state.dataSource}
-          renderRow={this.renderRow} />
-        {this.footer()}
+          renderRow={this.renderRow}
+          renderHeader={() => <Badge userInfo={this.props.userInfo}/>}
+          renderFooter={this.footer.bind(this)} />
       </View>
     )
   }
