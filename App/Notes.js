@@ -17,41 +17,31 @@ var styles = {
   },
   buttonText: {
     fontSize: 18,
-    color: 'white',
-    alignSelf: 'center'
+    color: 'white'
   },
   button: {
-    height: 36,
-    flexDirection: 'row',
+    height: 60,
     backgroundColor: '#48BBEC',
-    borderColor: '#48BBEC',
-    borderWidth: 1,
-    borderRadius: 8,
-    marginBottom: 10,
-    marginTop: 10,
-    alignSelf: 'stretch',
+    flex: 3,
+    alignItems: 'center',
     justifyContent: 'center'
   },
   searchInput: {
-    height: 50,
-    padding: 4,
-    marginRight: 5,
+    height: 60,
+    padding: 10,
     fontSize: 18,
-    borderWidth: 1,
-    borderColor: '#48BBEC',
-    borderRadius: 8,
-    color: '#48BBEC'
+    color: '#111',
+    flex: 10
   },
   rowContainer: {
-    flexDirection: 'row',
     alignSelf: 'stretch',
-    flex: 1,
     padding: 10
   },
   footerContainer: {
-    backgroundColor: '#f5f5f5',
-    height: 100,
-    justifyContent: 'flex-end'
+    backgroundColor: '#CBCBCB',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    flexDirection: 'row'
   }
 }
 
@@ -105,7 +95,6 @@ class Notes extends React.Component{
   footer(){
     return (
       <View style={styles.footerContainer}>
-        <Badge userInfo={this.props.userInfo}/>
         <TextInput
             style={styles.searchInput}
             value={this.state.note}
@@ -123,10 +112,11 @@ class Notes extends React.Component{
   render(){
     return (
       <View style={styles.container}>
-          <ListView
-            renderFooter = {this.footer.bind(this)}
-            dataSource={this.state.dataSource}
-            renderRow={this.renderRow} />
+        <Badge userInfo={this.props.userInfo}/>
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={this.renderRow} />
+        {this.footer()}
       </View>
     )
   }
