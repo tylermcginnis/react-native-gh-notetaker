@@ -1,33 +1,16 @@
 var React = require('react-native');
+var Badge = require('./Badge');
 
 var {
   Text,
   View,
   Image,
-  ListView
+  ScrollView
 } = React;
 
 var styles = {
   container: {
-    flex: 1,
-    marginTop: 65
-  },
-  name: {
-    alignSelf: 'center',
-    fontSize: 19,
-    marginTop: 10,
-    marginBottom: 5
-  },
-  handle: {
-    alignSelf: 'center',
-    fontSize: 14,
-  },
-  image: {
-    height: 125,
-    width: 125,
-    borderRadius: 65,
-    marginTop: 10,
-    alignSelf: 'center'
+    flex: 1
   },
   buttonText: {
     fontSize: 18,
@@ -35,16 +18,17 @@ var styles = {
     alignSelf: 'center'
   },
   separator: {
-    height: 2,
-    backgroundColor: '#666',
-    flex: 1
+    height: 1,
+    backgroundColor: '#E4E4E4',
+    flex: 1,
+    marginLeft: 15
   },
   rowContainer: {
     padding: 10
   },
   rowTitle: {
     color: '#48BBEC',
-    fontSize: 14
+    fontSize: 16
   },
   rowContent: {
     fontSize: 19
@@ -52,35 +36,32 @@ var styles = {
 }
 
 class Profile extends React.Component{
-  constructor(props){
-    super(props);
-    var ds = new ListView.DataSource({rowHasChanged: (row1, row2) => row1 !== row2})
-    this.state = {
-      dataSource: ds.cloneWithRows(['name', 'login', 'company', 'location', 'followers', 'following'])
-    }
-  }
-  renderRow(rowData){
-    var userInfo = this.props.userInfo;
-    return userInfo[rowData] ? (
-        <View>
-          <View style={styles.rowContainer}>
-            <Text style={styles.rowTitle}> {rowData[0].toUpperCase() + rowData.slice(1)} </Text>
-            <Text style={styles.rowContent}> {userInfo[rowData]} </Text>
-          </View>
-          <View style={styles.separator} />
-        </View>) :
-    (<View />);
+  getRowTitle(user, item){
+    return item[0] ? item[0].toUpperCase() + item.slice(1) : item;
   }
   render(){
+    var userInfo = this.props.userInfo;
+    var topicArr = ['company', 'location', 'followers', 'following', 'email', 'bio'];
+    var list = topicArr.map((item, index) => {
+      if(!userInfo[item]){
+        return <View/>
+      } else {
+        return (
+          <View>
+            <View style={styles.rowContainer}>
+              <Text style={styles.rowTitle}>{this.getRowTitle(userInfo, item)}</Text>
+              <Text style={styles.rowContent}> {userInfo[item]} </Text>
+            </View>
+            <View style={styles.separator} />
+          </View>
+        )
+      }
+    });
     return (
-      <View style={styles.container}>
-        <Image source={{uri: this.props.userInfo.avatar_url}} style={styles.image} />
-        <Text style={styles.name}> {this.props.userInfo.name} </Text>
-        <Text style={styles.handle}> {this.props.userInfo.login} </Text>
-        <ListView
-          dataSource={this.state.dataSource}
-          renderRow={this.renderRow.bind(this)} />
-      </View>
+      <ScrollView style={styles.container}>
+        <Badge userInfo={this.props.userInfo}/>
+        {list}
+      </ScrollView>
     )
   }
 };
