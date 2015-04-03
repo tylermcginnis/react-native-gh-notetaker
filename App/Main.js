@@ -68,12 +68,11 @@ class Main extends React.Component{
         <TextInput
           style={styles.searchInput}
           value={this.state.username}
-          onChange={this.handleChange.bind(this)}
-          placeholder="Github Username" />
+          onChange={this.handleChange.bind(this)} />
         <TouchableHighlight
           style={styles.button}
           onPress={this.handleSubmit.bind(this)}
-          underlayColor="black">
+          underlayColor="white">
             <Text style={styles.buttonText}>SEARCH</Text>
         </TouchableHighlight>
         {showErr}
@@ -89,34 +88,34 @@ var styles = StyleSheet.create({
     marginTop: 65,
     flexDirection: 'column',
     justifyContent: 'center',
-    backgroundColor: '#f5f5f5'
+    backgroundColor: '#48BBEC'
   },
   title: {
     marginBottom: 20,
     fontSize: 25,
     textAlign: 'center',
-    color: '#656565'
+    color: '#fff'
   },
   searchInput: {
     height: 50,
     padding: 4,
     marginRight: 5,
-    fontSize: 18,
+    fontSize: 23,
     borderWidth: 1,
-    borderColor: '#48BBEC',
+    borderColor: 'white',
     borderRadius: 8,
-    color: '#48BBEC'
+    color: 'white'
   },
   buttonText: {
     fontSize: 18,
-    color: 'white',
+    color: '#111',
     alignSelf: 'center'
   },
   button: {
-    height: 36,
+    height: 45,
     flexDirection: 'row',
-    backgroundColor: '#48BBEC',
-    borderColor: '#48BBEC',
+    backgroundColor: 'white',
+    borderColor: 'white',
     borderWidth: 1,
     borderRadius: 8,
     marginBottom: 10,

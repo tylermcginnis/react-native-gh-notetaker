@@ -14,7 +14,11 @@ var styles = {
     flexDirection: 'column',
   },
   image: {
-    height: 350,
+    height: 125,
+    width: 125,
+    borderRadius: 65,
+    marginTop: 10,
+    alignSelf: 'center'
   },
   buttonText: {
     fontSize: 18,
