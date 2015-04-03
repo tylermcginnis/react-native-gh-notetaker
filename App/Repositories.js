@@ -3,15 +3,15 @@ var Badge = require('./Badge');
 var Separator = require('./Separator');
 
 var {
-  View,
+  ScrollView,
   Text,
+  View,
   ListView
 } = React;
 
 var styles = {
   container: {
     flex: 1,
-    marginTop: 65
   },
   rowContainer: {
     flexDirection: 'column',
@@ -35,35 +35,27 @@ var styles = {
 }
 
 class Repositories extends React.Component{
-  constructor(props){
-    super(props);
-    var ds = new ListView.DataSource({rowHasChanged: (row1, row2) => row1 !== row2})
-    this.state = {
-      dataSource: ds.cloneWithRows(this.props.repos)
-    }
-  }
-  renderRow(rowData){
-    var desc = rowData.description ? <Text style={styles.description}> {rowData.description} </Text> : <View />;
-    return (
-      <View>
-        <View style={styles.rowContainer}>
-          <Text style={styles.name}> {rowData.name} </Text>
-          <Text style={styles.stars}> Stars: {rowData.stargazers_count} </Text>
-          {desc}
-          <Text style={styles.url}> {rowData.html_url} </Text>
-        </View>
-        <Separator />
-      </View>
-    )
-  }
   render(){
+    var repos = this.props.repos;
+    var list = repos.map((item, index) => {
+      var desc = repos[index].description ? <Text style={styles.description}> {repos[index].description} </Text> : <View />;
+      return (
+        <View>
+          <View style={styles.rowContainer}>
+            <Text style={styles.name}> {repos[index].name} </Text>
+            <Text style={styles.stars}> Stars: {repos[index].stargazers_count} </Text>
+            {desc}
+            <Text style={styles.url}> {repos[index].html_url} </Text>
+          </View>
+          <Separator />
+        </View>
+      )
+    });
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <Badge userInfo={this.props.userInfo} />
-        <ListView
-          dataSource={this.state.dataSource}
-          renderRow={this.renderRow} />
-      </View>
+        {list}
+      </ScrollView>
     )
   }
 };
