@@ -48,7 +48,6 @@ class Main extends React.Component{
       isLoading: true,
     });
     api.getBio(this.state.username)
-      .then((response) => response.json())
       .then((jsonRes) => this.handleResponse(jsonRes))
       .catch((err) => {
         this.setState({

@@ -66,11 +66,9 @@ class Notes extends React.Component{
       note: ''
     });
     api.addNote(this.props.userInfo.login, note)
-      .then((res) => res.json())
       .then((data) => {
         console.log('Request succeeded with JSON response', data);
         api.getNotes(this.props.userInfo.login)
-          .then((res) => res.json())
           .then((data) => {
             this.setState({
               dataSource: this.ds.cloneWithRows(data)

@@ -54,7 +54,6 @@ class Dashboard extends React.Component{
   }
   goToRepos(){
     api.getRepos(this.props.userInfo.login)
-      .then((res) => res.json())
       .then((jsonRes) => {
         this.props.navigator.push({
           component: Repositories,
@@ -68,7 +67,6 @@ class Dashboard extends React.Component{
   }
   goToNotes(){
     api.getNotes(this.props.userInfo.login)
-      .then((res) => res.json())
       .then((jsonRes) => {
         jsonRes = jsonRes || [];
         this.props.navigator.push({
