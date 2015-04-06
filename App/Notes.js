@@ -13,7 +13,8 @@ var {
 
 var styles = {
   container: {
-    flex: 1
+    flex: 1,
+    flexDirection: 'column',
   },
   buttonText: {
     fontSize: 18,
@@ -35,12 +36,9 @@ var styles = {
   },
   rowContainer: {
     padding: 10,
-    flex: 1,
-    flexDirection: 'row',
   },
   footerContainer: {
     backgroundColor: '#E3E3E3',
-    justifyContent: 'flex-end',
     alignItems: 'center',
     flexDirection: 'row'
   }
@@ -113,11 +111,11 @@ class Notes extends React.Component{
   render(){
     return (
       <View style={styles.container}>
-        <ListView
-          dataSource={this.state.dataSource}
-          renderRow={this.renderRow}
-          renderHeader={() => <Badge userInfo={this.props.userInfo}/>}
-          renderFooter={this.footer.bind(this)} />
+          <ListView
+            dataSource={this.state.dataSource}
+            renderRow={this.renderRow}
+            renderHeader={() => <Badge userInfo={this.props.userInfo}/>} />
+        {this.footer()}
       </View>
     )
   }

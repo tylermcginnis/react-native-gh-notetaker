@@ -1,6 +1,8 @@
 var React = require('react-native');
 var Main = require('./App/Main');
 
+window.React = React;
+
 var {
   AppRegistry,
   StyleSheet,
