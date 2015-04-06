@@ -1,5 +1,5 @@
 var React = require('react-native');
-var Main = require('./App/Main');
+var Main = require('./App/Components/Main');
 
 window.React = React;
 

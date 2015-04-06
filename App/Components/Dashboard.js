@@ -1,6 +1,6 @@
 var React = require('react-native');
 var Profile = require('./Profile');
-var api = require('./Network/api');
+var api = require('../Utils/api');
 var Repositories = require('./Repositories');
 var Notes = require('./Notes');
 
