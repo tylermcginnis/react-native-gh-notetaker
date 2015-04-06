@@ -1,15 +1,16 @@
 var React = require('react-native');
 var Badge = require('./Badge');
-var Separator = require('./Separator');
+var Separator = require('./Helpers/Separator');
 
 var {
   Text,
   View,
   Image,
+  StyleSheet,
   ScrollView
 } = React;
 
-var styles = {
+var styles = StyleSheet.create({
   container: {
     flex: 1
   },
@@ -28,7 +29,7 @@ var styles = {
   rowContent: {
     fontSize: 19
   }
-}
+});
 
 class Profile extends React.Component{
   getRowTitle(user, item){

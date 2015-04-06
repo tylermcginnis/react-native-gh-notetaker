@@ -1,6 +1,6 @@
 var React = require('react-native');
 var api = require('./Network/api');
-var Separator = require('./Separator');
+var Separator = require('./Helpers/Separator');
 var Badge = require('./Badge');
 
 var {
@@ -8,10 +8,11 @@ var {
   Text,
   ListView,
   TextInput,
+  StyleSheet,
   TouchableHighlight
 } = React;
 
-var styles = {
+var styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
@@ -42,7 +43,7 @@ var styles = {
     alignItems: 'center',
     flexDirection: 'row'
   }
-}
+});
 
 class Notes extends React.Component{
   constructor(props){

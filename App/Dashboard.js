@@ -9,10 +9,11 @@ var {
   View,
   NavigatorIOS,
   Image,
+  StyleSheet,
   TouchableHighlight
 } = React;
 
-var styles = {
+var styles = StyleSheet.create({
   container: {
     marginTop: 65,
     flex: 1
@@ -25,7 +26,7 @@ var styles = {
     color: 'white',
     alignSelf: 'center'
   }
-}
+});
 
 class Dashboard extends React.Component{
   makeBackground(btn){

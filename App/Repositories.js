@@ -1,7 +1,7 @@
 var React = require('react-native');
 var Badge = require('./Badge');
-var Separator = require('./Separator');
-var Web_View = require('./WebView');
+var Separator = require('./Helpers/Separator');
+var Web_View = require('./Helpers/WebView');
 
 var {
   ScrollView,
@@ -9,10 +9,11 @@ var {
   View,
   TouchableHighlight,
   ListView,
+  StyleSheet,
   WebView,
 } = React;
 
-var styles = {
+var styles = StyleSheet.create({
   container: {
     flex: 1,
   },
@@ -35,7 +36,7 @@ var styles = {
     fontSize: 14,
     paddingBottom: 5
   }
-}
+});
 
 class Repositories extends React.Component{
   openPage(url){
