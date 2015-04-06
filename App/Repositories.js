@@ -8,9 +8,7 @@ var {
   Text,
   View,
   TouchableHighlight,
-  ListView,
-  StyleSheet,
-  WebView,
+  StyleSheet
 } = React;
 
 var styles = StyleSheet.create({

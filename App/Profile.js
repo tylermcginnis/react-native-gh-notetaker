@@ -5,7 +5,6 @@ var Separator = require('./Helpers/Separator');
 var {
   Text,
   View,
-  Image,
   StyleSheet,
   ScrollView
 } = React;

@@ -67,7 +67,6 @@ class Notes extends React.Component{
     });
     api.addNote(this.props.userInfo.login, note)
       .then((data) => {
-        console.log('Request succeeded with JSON response', data);
         api.getNotes(this.props.userInfo.login)
           .then((data) => {
             this.setState({
