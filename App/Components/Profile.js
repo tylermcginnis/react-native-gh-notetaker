@@ -40,10 +40,10 @@ class Profile extends React.Component{
     var topicArr = ['company', 'location', 'followers', 'following', 'email', 'bio', 'public_repos'];
     var list = topicArr.map((item, index) => {
       if(!userInfo[item]){
-        return <View/>
+        return <View key={index}/>
       } else {
         return (
-          <View>
+          <View key={index}>
             <View style={styles.rowContainer}>
               <Text style={styles.rowTitle}>{this.getRowTitle(userInfo, item)}</Text>
               <Text style={styles.rowContent}> {userInfo[item]} </Text>
@@ -61,5 +61,9 @@ class Profile extends React.Component{
     )
   }
 };
+
+Profile.propTypes = {
+  userInfo: React.PropTypes.object.isRequired
+}
 
 module.exports = Profile;

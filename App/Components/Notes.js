@@ -100,7 +100,7 @@ class Notes extends React.Component{
         <TouchableHighlight
             style={styles.button}
             onPress={this.handleSubmit.bind(this)}
-            underlayColor="black">
+            underlayColor="#88D4F5">
               <Text style={styles.buttonText}>Submit</Text>
           </TouchableHighlight>
       </View>
@@ -118,5 +118,10 @@ class Notes extends React.Component{
     )
   }
 };
+
+Notes.propTypes = {
+  userInfo: React.PropTypes.object.isRequired,
+  notes: React.PropTypes.object.isRequired
+}
 
 module.exports = Notes;

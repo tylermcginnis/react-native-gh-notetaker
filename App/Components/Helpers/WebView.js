@@ -24,4 +24,8 @@ class Web extends React.Component{
   }
 };
 
+Web.propTypes = {
+ url: React.PropTypes.string.isRequired
+};
+
 module.exports = Web;

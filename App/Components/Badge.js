@@ -45,4 +45,8 @@ class Badge extends React.Component{
   }
 };
 
+Badge.propTypes = {
+  userInfo: React.PropTypes.object.isRequired
+}
+
 module.exports = Badge;

@@ -49,11 +49,11 @@ class Repositories extends React.Component{
     var list = repos.map((item, index) => {
       var desc = repos[index].description ? <Text style={styles.description}> {repos[index].description} </Text> : <View />;
       return (
-        <View>
+        <View key={index}>
           <View style={styles.rowContainer}>
             <TouchableHighlight
               onPress={this.openPage.bind(this, repos[index].html_url)}
-              underLayColor='green'>
+              underlayColor='transparent'>
               <Text style={styles.name}>{repos[index].name}</Text>
             </TouchableHighlight>
             <Text style={styles.stars}> Stars: {repos[index].stargazers_count} </Text>
@@ -71,5 +71,10 @@ class Repositories extends React.Component{
     )
   }
 };
+
+Repositories.propTypes = {
+  userInfo: React.PropTypes.object.isRequired,
+  repos: React.PropTypes.array.isRequired
+}
 
 module.exports = Repositories;

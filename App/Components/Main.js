@@ -72,7 +72,8 @@ class Main extends React.Component{
   handleResponse(res){
     if(res.message === 'Not Found'){
       this.setState({
-        error: 'User not found'
+        error: 'User not found',
+        isLoading: false
       })
     } else {
       this.props.navigator.push({

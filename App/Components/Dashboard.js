@@ -68,7 +68,7 @@ class Dashboard extends React.Component{
   goToNotes(){
     api.getNotes(this.props.userInfo.login)
       .then((jsonRes) => {
-        jsonRes = jsonRes || [];
+        jsonRes = jsonRes || {};
         this.props.navigator.push({
           component: Notes,
           title: 'Notes',
@@ -105,5 +105,9 @@ class Dashboard extends React.Component{
     )
   }
 };
+
+Dashboard.propTypes = {
+  userInfo: React.PropTypes.object.isRequired
+}
 
 module.exports = Dashboard;
