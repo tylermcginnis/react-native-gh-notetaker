@@ -1,5 +1,6 @@
 var React = require('react-native');
 var api = require('../Utils/api');
+var Dashboard = require('./Dashboard')
 
 var {
   View,
@@ -82,7 +83,7 @@ class Main extends React.Component{
           })
         } else {
           this.props.navigator.push({
-            title: res.name || "Select an Option"
+            title: res.name || "Select an Option",
             component: Dashboard,
             passProps: {userInfor: res}
           });
